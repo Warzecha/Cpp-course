@@ -4,4 +4,16 @@
 
 
 #include <iostream>
+#include <cstdlib>
 #include "ReverseString.h"
+
+
+
+
+
+int main(){
+
+    std::cout << reverse("abcd");
+
+    return 0;
+}

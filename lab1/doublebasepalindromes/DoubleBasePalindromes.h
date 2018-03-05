@@ -7,6 +7,7 @@
 
 
 #include <cstdint>
+#include <string>
 
 uint64_t DoubleBasePalindromes(int max_vaule_exculsive);
 

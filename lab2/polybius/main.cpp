@@ -13,12 +13,6 @@ int main(int argc, char* argv[]) {
     std::ofstream wFile(argv[2]);
 
     char* status = argv[3];
-    std::cout<<(int)*status<<std::endl;
-    int stat;
-    if((int)*status == 49)
-        stat = 1;
-    else stat =0;
-
 
 
 
@@ -27,24 +21,24 @@ int main(int argc, char* argv[]) {
     if(!wFile)
         std::cout<<"Nie mozna otworzyc pliku wFile"<<std::endl;
 
-    std::string message;
-    rFile >> message;
+    std::string message((std::istreambuf_iterator<char>(rFile)), std::istreambuf_iterator<char>());
+    std::cout<<message<<std::endl;
     std::string answer;
 
+    rFile.close();
 
-    if(stat) {
+
+    if(*status == '1') {
         answer = PolybiusCrypt(message);
         std::cout << answer;
     }
     else {
-        std::cout<<"ELO";
+        std::cout<<"ELO"<<std::endl;
         answer = PolybiusDecrypt(message);
         std::cout << answer;
     }
 
     wFile << answer;
-
-    rFile.close();
     wFile.close();
 
 

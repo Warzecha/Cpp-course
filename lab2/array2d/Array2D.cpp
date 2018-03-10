@@ -29,7 +29,7 @@ int ** Array2D(int rows, int cols) {
 }
 
 void DeleteArray2D(int **array, int rows, int cols) {
-    for (int i = 0; i < rows ; i++) {
+    for (int i = 0; i < cols ; i++) {
         delete array[i];
     }
     delete array;

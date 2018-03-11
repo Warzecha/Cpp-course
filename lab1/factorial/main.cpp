@@ -2,6 +2,6 @@
 #include "Factorial.h"
 
 int main() {
-  std::cout << "factorial of 20 is: " << factorial(5) << std::endl;
+  std::cout << "Factorial of 20 is: " << Factorial(15) << std::endl;
   return 0;
 }

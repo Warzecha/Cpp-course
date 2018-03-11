@@ -3,13 +3,13 @@
 //
 
 #include "Palindrome.h"
+#include "./../reversestring/ReverseString.h"
 
 
 bool is_palindrome(std::string str)
 {
-
-
-
-    return true;
-
+    if (str == std::string(str.rbegin(), str.rend())) {
+        return true;
+    }
+    else return false;
 }

@@ -3,14 +3,8 @@
 //
 
 #include "DoubleBasePalindromes.h"
+#include "../palindrome/Palindrome.h"
 
-bool is_palindrome(std::string str)
-{
-    if (str == std::string(str.rbegin(), str.rend())) {
-        return true;
-    }
-    else return false;
-}
 
 std::string dec2bin(int dec)
 {

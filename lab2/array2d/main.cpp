@@ -7,7 +7,7 @@
 
 int main() {
 
-    int ** tab = NewArray(5,7);
+    int ** tab;
     tab = Array2D(5,7);
 
     for (int i = 0; i < 5; ++i) {

@@ -3,6 +3,8 @@
 //
 
 #include <iostream>
+#include <cstring>
+#include <algorithm>
 #include "XorCypherBreaker.h"
 
 std::string
@@ -26,31 +28,36 @@ XorCypherBreaker(const std::vector<char> &cryptogram, int key_length, const std:
 
         decrypted = XorCypher(cryptogram, key_length, key);
 
-        decrypted.substr()
+        int matches = 0;
 
 
+        auto start = 0U;
+        auto end = decrypted.find(' ');
+        while (end != std::string::npos)
+        {
+            std::string token = decrypted.substr(start, end - start);
+            start = end + 1;
+            end = decrypted.find(' ', start);
+
+            if (find(dictionary.begin(),dictionary.end(),token) != dictionary.end()) {
+                matches++;
+            }
 
 
+        }
 
-
-
-
-
-
-
-
+        if(matches > max_matches)
+        {
+            max_matches = matches;
+            best_key = key;
+        }
 
 
     }
 
 
 
-
-
-
-
-
-    return std::__cxx11::string();
+    return best_key;
 }
 
 std::string XorCypher(const std::vector<char> &message, int key_length, std::string key) {
@@ -59,9 +66,8 @@ std::string XorCypher(const std::vector<char> &message, int key_length, std::str
     int i = 0;
     for( auto c : message)
     {
-       cryptogram += std::to_string(c ^ key[i]);
-
-
+        char character = c ^ key[i];
+        cryptogram += character;
         i = (i+1) % key_length;
     }
 

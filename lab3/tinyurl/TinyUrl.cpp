@@ -22,7 +22,7 @@ std::unique_ptr<TinyUrlCodec> Init() {
 
 }
 
-void NextHash(std::arrray<char, 6> *state) {
+void NextHash(std::array<char, 6> *state) {
 
 }
 

@@ -9,11 +9,11 @@ int main()
 {
 
     std::vector<std::string> times;
-    
+
     times.push_back("23:59");
     times.push_back("00:01");
-    
-    std::cout << minimaltimedifference::MinimalTimeDifference(times);
+
+    std::cout << "ala" << minimaltimedifference::MinimalTimeDifference(times);
 
 
     return 0;

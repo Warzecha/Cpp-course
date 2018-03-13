@@ -3,7 +3,7 @@ project(minimaltimedifference)
 set(HEDEAR_FILES MinimalTimeDifference.h)
 set(SOURCE_FILES MinimalTimeDifference.cpp)
 
-add_library(libminimaltimedifference STATIC ${SOURCE_FILES})
+add_library(libminimaltimedifference STATIC ${SOURCE_FILES} MinimalTimeDifference.h MinimalTimeDifference.cpp)
 target_include_directories(libminimaltimedifference PUBLIC .)
 
 add_executable(minimaltimedifference ${SOURCE_FILES} main.cpp  )

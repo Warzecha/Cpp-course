@@ -8,13 +8,12 @@
 int main()
 {
 
-    //"", ""}, 538
-    int a = minimaltimedifference::ToMinutes("01:24");
-    int b = minimaltimedifference::ToMinutes("10:22");
-
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-
+    std::vector<std::string> times;
+    
+    times.push_back("23:59");
+    times.push_back("00:01");
+    
+    std::cout << minimaltimedifference::MinimalTimeDifference(times);
 
 
     return 0;

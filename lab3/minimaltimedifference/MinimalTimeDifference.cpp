@@ -34,13 +34,16 @@ namespace minimaltimedifference
 
         std::sort(time_in_minutes.begin(),time_in_minutes.end());
 
-        unsigned int difference = static_cast<unsigned int>(abs(*time_in_minutes.begin() - *time_in_minutes.end() ));
+        unsigned int difference = static_cast<unsigned int>((1440 - *(time_in_minutes.end()-1) + *time_in_minutes.begin() ));
 
+        //std::cout<<"diff = "<<*time_in_minutes.begin()<<std::endl;
 
         for(auto it = time_in_minutes.begin(); it != time_in_minutes.end() - 1; it++)
         {
+
             if( *(it+1) - *it < difference)
             {
+                //std::cout<<"not ok";
                 difference = *(it+1) - *it;
             }
 

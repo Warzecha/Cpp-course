@@ -27,39 +27,41 @@ int main()
     
     
 
-//    std::vector<char> cryptogram
-//            {93, 65, 76, 47, 7, 25, 15, 4, 76, 34, 0, 30, 30, 6, 31, 76, 12, 13, 2, 79, 24, 13, 4, 9, 76, 28, 15, 30, 10, 9,
-//             2, 28, 4, 3, 27, 76, 3, 9, 76, 4, 6, 31, 76, 13, 0, 25, 10, 76, 31, 12, 30, 9, 10, 2, 76, 0, 10, 76, 11, 9, 13,
-//             27, 4, 76, 93, 66, 76, 63, 30, 3, 8, 30, 13, 2, 1, 9, 29, 76, 68, 1, 3, 25, 1, 66, 69, 79, 45, 76, 31, 9, 30, 28,
-//             3, 2, 79, 27, 4, 0, 76, 10, 6, 20, 9, 11, 76, 13, 79, 28, 30, 0, 14, 0, 10, 1, 76, 22, 3, 25, 79, 8, 3, 79, 2, 3,
-//             27, 76, 7, 1, 3, 27, 79, 21, 3, 26, 76, 4, 14, 26, 9, 67, 76, 5, 1, 76, 13, 79, 27, 13, 22, 76, 21, 0, 25, 76,
-//             11, 3, 76, 1, 3, 24, 79, 25, 2, 11, 9, 30, 28, 24, 13, 1, 8, 66};
+    std::vector<char> cryptogram
+            {93, 65, 76, 47, 7, 25, 15, 4, 76, 34, 0, 30, 30, 6, 31, 76, 12, 13, 2, 79, 24, 13, 4, 9, 76, 28, 15, 30, 10, 9,
+             2, 28, 4, 3, 27, 76, 3, 9, 76, 4, 6, 31, 76, 13, 0, 25, 10, 76, 31, 12, 30, 9, 10, 2, 76, 0, 10, 76, 11, 9, 13,
+             27, 4, 76, 93, 66, 76, 63, 30, 3, 8, 30, 13, 2, 1, 9, 29, 76, 68, 1, 3, 25, 1, 66, 69, 79, 45, 76, 31, 9, 30, 28,
+             3, 2, 79, 27, 4, 0, 76, 10, 6, 20, 9, 11, 76, 13, 79, 28, 30, 0, 14, 0, 10, 1, 76, 22, 3, 25, 79, 8, 3, 79, 2, 3,
+             27, 76, 7, 1, 3, 27, 79, 21, 3, 26, 76, 4, 14, 26, 9, 67, 76, 5, 1, 76, 13, 79, 27, 13, 22, 76, 21, 0, 25, 76,
+             11, 3, 76, 1, 3, 24, 79, 25, 2, 11, 9, 30, 28, 24, 13, 1, 8, 66};
     
     
     
-    std::string wiadomosc = "cos po angielsu";
-    std::string klucz = "aaa";
-    std::vector<char> cryptogram;
+    std::string wiadomosc = "end of the world";
+    std::string klucz = "aab";
+
+    std::vector<char> cryptogram2;
     
     for(auto c : wiadomosc)
     {
-        cryptogram.push_back(c);
+        cryptogram2.push_back(c);
     }
     
     std::string zakodowana = XorCypher(cryptogram, klucz.length(), klucz);
     
     std::cout<<"zakodowana: "<<zakodowana<<std::endl;
 
-    std::vector<char> cryptogram2;
+    std::vector<char> cryptogram3;
 
     for(auto c : zakodowana)
     {
-        cryptogram2.push_back(c);
+        cryptogram3.push_back(c);
     }
 
 
-    std::string key = XorCypherBreaker(cryptogram2, 3, dictionary);
-    std::string message = XorCypher(cryptogram,key.length(),key);
+    std::string key = XorCypherBreaker(cryptogram3, 3, dictionary);
+    std::cout<<"klucz: "<<key<<std::endl;
+    std::string message = XorCypher(cryptogram3,key.length(),key);
 
     std::cout<<message<<std::endl<<std::endl;
 

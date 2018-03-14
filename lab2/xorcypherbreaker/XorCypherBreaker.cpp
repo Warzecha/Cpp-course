@@ -24,7 +24,7 @@ XorCypherBreaker(const std::vector<char> &cryptogram, int key_length, const std:
 
     while (generateNextKey(key)[0] <= 'z')
     {
-        key = generateNextKey(key);
+
 
         decrypted = XorCypher(cryptogram, key_length, key);
 
@@ -52,7 +52,7 @@ XorCypherBreaker(const std::vector<char> &cryptogram, int key_length, const std:
             best_key = key;
         }
 
-
+        key = generateNextKey(key);
     }
 
 

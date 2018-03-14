@@ -333,7 +333,7 @@ TEST(GetThreadCountTest, ReturnsCorrectValue) {
   ASSERT_EQ(0, pthread_join(thread_id, &dummy));
 
   // The OS may not immediately report the updated thread count after
-  // joining a thread, causing flakiness in this test. To counter that, we
+  // joining a thread, causing flakiness in this test. To ccounter that, we
   // wait for up to .5 seconds for the OS to report the correct value.
   for (int i = 0; i < 5; ++i) {
     if (GetThreadCount() == starting_count)
@@ -1120,9 +1120,9 @@ TEST(MutexTest, OnlyOneThreadCanLockAtATime) {
   for (int i = 0; i < kThreadCount; ++i)
     counting_threads[i]->Join();
 
-  // If the mutex lets more than one thread to increment the counter at a
+  // If the mutex lets more than one thread to increment the ccounter at a
   // time, they are likely to encounter a race condition and have some
-  // increments overwritten, resulting in the lower then expected counter
+  // increments overwritten, resulting in the lower then expected ccounter
   // value.
   EXPECT_EQ(kCycleCount * kThreadCount, locked_counter.value());
 }

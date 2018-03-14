@@ -7204,7 +7204,7 @@ TEST(EventListenerTest, default_result_printer) {
   EXPECT_TRUE(listeners.default_result_printer() == NULL);
   EXPECT_TRUE(is_destroyed);
 
-  // After broadcasting an event the counter is still the same, indicating
+  // After broadcasting an event the ccounter is still the same, indicating
   // the listener is not in the list anymore.
   TestEventListenersAccessor::GetRepeater(&listeners)->OnTestProgramStart(
       *UnitTest::GetInstance());
@@ -7263,7 +7263,7 @@ TEST(EventListenerTest, default_xml_generator) {
   EXPECT_TRUE(listeners.default_xml_generator() == NULL);
   EXPECT_TRUE(is_destroyed);
 
-  // After broadcasting an event the counter is still the same, indicating
+  // After broadcasting an event the ccounter is still the same, indicating
   // the listener is not in the list anymore.
   TestEventListenersAccessor::GetRepeater(&listeners)->OnTestProgramStart(
       *UnitTest::GetInstance());

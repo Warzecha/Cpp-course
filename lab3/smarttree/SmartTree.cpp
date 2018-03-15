@@ -89,9 +89,15 @@ namespace datastructures
 
     std::unique_ptr<SmartTree> RestoreHelp(std::queue<std::string> &queueOfValues, std::queue<char > &queueOfBrackets, std::unique_ptr<SmartTree> &tree)
     {
+
+
 //
 //        if(queueOfBrackets.front() == ']')
+//        {
+//
 //            return std::move(tree);
+//        }
+
 
         if(!tree)
         {
@@ -114,11 +120,15 @@ namespace datastructures
             return RestoreHelp(queueOfValues,queueOfBrackets, tree);
         } else
         {
+
+
+
             if(queueOfBrackets.front() == '[')
             {
                 if(queueOfValues.front() != "none")
                 {
                     int value = std::stoi(queueOfValues.front());
+
                     std::unique_ptr<SmartTree> child = CreateLeaf(value);
                     tree = InsertLeftChild(std::move(tree), std::move(child));
                     queueOfBrackets.pop();
@@ -133,25 +143,23 @@ namespace datastructures
                 }
 
             }
-            if(queueOfBrackets.front() == '[')
-            {
-                if(queueOfValues.front() != "none")
-                {
+
+            if(queueOfBrackets.front() == '[') {
+                if (queueOfValues.front() != "none") {
                     int value = std::stoi(queueOfValues.front());
+
                     std::unique_ptr<SmartTree> child = CreateLeaf(value);
                     tree = InsertRightChild(std::move(tree), std::move(child));
                     queueOfBrackets.pop();
                     queueOfValues.pop();
                     tree->right = RestoreHelp(queueOfValues, queueOfBrackets, tree->right);
                     queueOfBrackets.pop();
+                } else {
+                    queueOfBrackets.pop();
+                    queueOfValues.pop();
+                    queueOfBrackets.pop();
                 }
-            }else
-            {
-                queueOfBrackets.pop();
-                queueOfValues.pop();
-                queueOfBrackets.pop();
             }
-
 
             return std::move(tree);
         }

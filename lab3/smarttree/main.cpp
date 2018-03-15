@@ -5,15 +5,17 @@
 #include <iostream>
 #include "SmartTree.h"
 
-using namespace datastructures;
+
 int main()
 {
 
+    auto tree = datastructures::RestoreTree("[99 [100 [1234 [none] [none]] [4321 [none] [none]]] "
+                                    "[88 [897 [none] [none]] [761 [none] [none]]]]");
 
-    auto tree = RestoreTree("[-13 [none] [none]]");
 
-
-    std::cout<< datastructures::DumpTree(tree);
+    std::cout<< datastructures::DumpTree(tree)<<std::endl;
+    std::cout<< "[99 [100 [1234 [none] [none]] [4321 [none] [none]]] "
+            "[88 [897 [none] [none]] [761 [none] [none]]]]";
 
 
     return 0;

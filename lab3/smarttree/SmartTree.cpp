@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <stack>
 #include <queue>
+#include <iostream>
+#include <ostream>
 #include "SmartTree.h"
 
 namespace datastructures
@@ -87,8 +89,9 @@ namespace datastructures
 
     std::unique_ptr<SmartTree> RestoreHelp(std::queue<std::string> &queueOfValues, std::queue<char > &queueOfBrackets, std::unique_ptr<SmartTree> &tree)
     {
-        if(queueOfBrackets.front() == ']')
-            return std::move(tree);
+//
+//        if(queueOfBrackets.front() == ']')
+//            return std::move(tree);
 
         if(!tree)
         {
@@ -99,23 +102,28 @@ namespace datastructures
                     return nullptr;
                 } else
                 {
-                    tree = CreateLeaf(std::stoi(queueOfValues.front()));
+
+                    int value = std::stoi(queueOfValues.front());
+                    tree = CreateLeaf(value);
+
                     queueOfBrackets.pop();
                     queueOfValues.pop();
                 }
             }
-            RestoreHelp(queueOfValues,queueOfBrackets, tree);
+
+            return RestoreHelp(queueOfValues,queueOfBrackets, tree);
         } else
         {
             if(queueOfBrackets.front() == '[')
             {
                 if(queueOfValues.front() != "none")
                 {
-                    std::unique_ptr<SmartTree> child = CreateLeaf(std::stoi(queueOfValues.front()));
+                    int value = std::stoi(queueOfValues.front());
+                    std::unique_ptr<SmartTree> child = CreateLeaf(value);
                     tree = InsertLeftChild(std::move(tree), std::move(child));
                     queueOfBrackets.pop();
                     queueOfValues.pop();
-                    RestoreHelp(queueOfValues, queueOfBrackets, tree->left);
+                    tree->left = RestoreHelp(queueOfValues, queueOfBrackets, tree->left);
                     queueOfBrackets.pop();
                 }else
                 {
@@ -129,11 +137,12 @@ namespace datastructures
             {
                 if(queueOfValues.front() != "none")
                 {
-                    std::unique_ptr<SmartTree> child = CreateLeaf(std::stoi(queueOfValues.front()));
+                    int value = std::stoi(queueOfValues.front());
+                    std::unique_ptr<SmartTree> child = CreateLeaf(value);
                     tree = InsertRightChild(std::move(tree), std::move(child));
                     queueOfBrackets.pop();
                     queueOfValues.pop();
-                    RestoreHelp(queueOfValues, queueOfBrackets, tree->right);
+                    tree->right = RestoreHelp(queueOfValues, queueOfBrackets, tree->right);
                     queueOfBrackets.pop();
                 }
             }else
@@ -144,10 +153,8 @@ namespace datastructures
             }
 
 
-
+            return std::move(tree);
         }
-
-
 
 
 
@@ -157,11 +164,15 @@ namespace datastructures
 
     std::unique_ptr<SmartTree> RestoreTree(const std::string &str) {
 
+
         std::queue<std::string> queueOfValues;
         
         std::string str_copy = str;
         str_copy.erase(remove_if(str_copy.begin(), str_copy.end(), isspace), str_copy.end());
         str_copy.erase(std::remove(str_copy.begin(), str_copy.end(), ']'), str_copy.end());
+
+        str_copy.erase(0,1);
+        str_copy += '[';
 
         auto start = 0U;
         auto end = str_copy.find('[');
@@ -184,9 +195,11 @@ namespace datastructures
                 queueOfBrackets.push(c);
         }
 
-        std::unique_ptr<SmartTree> tree;
 
-        return std::unique_ptr<SmartTree>();
+        std::unique_ptr<SmartTree> tree;
+        tree = RestoreHelp(queueOfValues, queueOfBrackets, tree);
+
+        return std::move(tree);
     }
 }
 

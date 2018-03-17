@@ -1,19 +1,32 @@
 //
 // Created by torzmich on 13.03.18.
 //
-#include <iostream>
+#include "TinyUrl.h"
 int main() {
 
-    std::string longUrl = "www.abc.com/alfabet";
-    longUrl = longUrl.substr(4);
-    std::string shortUrl;
-    std::string toCode;
+    std::array<char,6> *ptr = new std::array<char,6> ({'0', '0','0', '0','0','0'});
+    NextHash(ptr);
 
-    for(char c : longUrl) {
-        if(c != '.' && c != '/')
-            toCode += c;
+    for (int i = 0; i < ptr->size(); ++i) {
+        std::cout<<(*ptr)[i];
     }
-    std::cout<<toCode;
+
+    std::cout<<std::endl;
+
+    std::string firstUrl = "www.abcd.com/bardzodobrylink";
+    std::unique_ptr<TinyUrlCodec> ptr2 = Init();
+    std::string tinyUrl = Encode(firstUrl, &ptr2);
+    std::cout<<tinyUrl<<std::endl;
+    std::string longUrl = Decode(ptr2,tinyUrl);
+    std::cout<<longUrl<<std::endl;
+    std::string secondUrl = "https://www.facebook.pl/123123";
+    tinyUrl = Encode(secondUrl, &ptr2);
+    std::cout<<tinyUrl<<std::endl;
+    longUrl = Decode(ptr2, tinyUrl);
+    std::cout<<longUrl<<std::endl;
+
+
+
 
 
     return 0;

@@ -18,9 +18,9 @@ public:
 
     const std::string &getSurname() const;
 
-    const std::experimental::optional<std::string> &getSecondName() const;
+    const std::string &getSecondName() const;
 
-    const std::experimental::optional<std::string> &getThirdName() const;
+    const std::string &getThirdName() const;
 
     void setFirstName(const std::string &firstName);
 
@@ -29,6 +29,18 @@ public:
     void setSecondName(const std::string &secondName);
 
     void setThirdName(const std::string &thirdName);
+
+    std::string ToFullInitials();
+
+    std::string ToFirstNamesInitials();
+
+    std::string ToSurnameNames();
+
+    std::string ToNamesSurname();
+
+    bool IsBeforeBySurname(std::string surname);
+
+    bool IsBeforeByFirstName(std::string firstname);
 
 private:
     std::string firstName;

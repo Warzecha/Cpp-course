@@ -71,7 +71,7 @@ namespace memorychunk
         if(this != &other)
         {
             delete[](this->ptr);
-            //this->ptr = new int8_t [other.size];
+            //this->ptr = new ithnt8_t [other.size];
             //std::copy(other.ptr,other.ptr+other.size,this->ptr);
             this->ptr = other.ptr;
             this->size = other.size;

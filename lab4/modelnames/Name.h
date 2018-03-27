@@ -8,47 +8,54 @@
 #include <iostream>
 #include <experimental/optional>
 
-class Name {
-public:
-    Name(std::string firstName, std::string surname);
+namespace modelnames{
 
-    Name(std::string name);
+    class Name {
+    public:
+        Name(std::string firstName, std::string surname);
 
-    const std::string &getFirstName() const;
+        Name(std::string name);
 
-    const std::string &getSurname() const;
+        const std::string &getFirstName() const;
 
-    const std::string &getSecondName() const;
+        const std::string &getSurname() const;
 
-    const std::string &getThirdName() const;
+        const std::string &getSecondName() const;
 
-    void setFirstName(const std::string &firstName);
+        const std::string &getThirdName() const;
 
-    void setSurname(const std::string &surname);
+        void setFirstName(const std::string &firstName);
 
-    void setSecondName(const std::string &secondName);
+        void setSurname(const std::string &surname);
 
-    void setThirdName(const std::string &thirdName);
+        void setSecondName(const std::string &secondName);
 
-    std::string ToFullInitials();
+        void setThirdName(const std::string &thirdName);
 
-    std::string ToFirstNamesInitials();
+        std::string ToFullInitials();
 
-    std::string ToSurnameNames();
+        std::string ToFirstNamesInitials();
 
-    std::string ToNamesSurname();
+        std::string ToSurnameNames();
 
-    bool IsBeforeBySurname(std::string surname);
+        std::string ToNamesSurname();
 
-    bool IsBeforeByFirstName(std::string firstname);
+        bool IsBeforeBySurname(std::string surname);
 
-private:
-    std::string firstName;
-    std::string surname;
-    std::string secondName;
-    std::string thirdName;
+        bool IsBeforeByFirstName(std::string firstname);
 
-};
+    private:
+        std::string firstName;
+        std::string surname;
+        std::string secondName;
+        std::string thirdName;
+
+    };
+
+
+}
+
+
 
 
 #endif //JIMP_EXERCISES_MODELNAMES_H

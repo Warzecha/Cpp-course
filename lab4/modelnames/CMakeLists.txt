@@ -7,8 +7,8 @@
 
 project(name)
 
-set(HEDEAR_FILES Name.h)
-set(SOURCE_FILES Name.cpp)
+set(HEDEAR_FILES Name.h Point.h)
+set(SOURCE_FILES Name.cpp Point.cpp)
 
 add_library(libname STATIC ${SOURCE_FILES})
 target_include_directories(libname PUBLIC .)

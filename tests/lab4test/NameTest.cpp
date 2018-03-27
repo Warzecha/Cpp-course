@@ -8,6 +8,7 @@
 #include <MemLeakTest.h>
 #include <StringUtility.h>
 #include <Name.h>
+#include "Point.h"
 
 using ::modelnames::Name;
 using ::std::make_unique;

@@ -9,15 +9,12 @@
 int main()
 {
 
-    std::vector<int> numbers;
-
-    numbers.push_back(-2);
-    numbers.push_back(2);
-    numbers.push_back(-3);
+    std::vector<int> numbers = {-11, -90, -4, -5, -9, -1, -3, -1};
 
 
 
-    std::cout<<GreatestProduct(numbers,2);
+
+    std::cout<<GreatestProduct(numbers,3);
 
 
 

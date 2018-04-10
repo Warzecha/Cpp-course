@@ -8,7 +8,7 @@
 #include <iostream>
 #include <experimental/optional>
 
-namespace modelnames{
+namespace model{
 
     class Name {
     public:
@@ -16,13 +16,10 @@ namespace modelnames{
 
         Name(std::string name);
 
-        const std::string &getFirstName() const;
-
-        const std::string &getSurname() const;
-
-        const std::string &getSecondName() const;
-
-        const std::string &getThirdName() const;
+        std::string FirstName() const;
+        std::experimental::optional<std::string> SecondName() const;
+        std::experimental::optional<std::string> ThirdName() const;
+        std::string Surname() const;
 
         void setFirstName(const std::string &firstName);
 
@@ -40,15 +37,15 @@ namespace modelnames{
 
         std::string ToNamesSurname();
 
-        bool IsBeforeBySurname(std::string surname);
+        bool IsBeforeBySurname(Name &name);
 
-        bool IsBeforeByFirstName(std::string firstname);
+        bool IsBeforeByFirstName(Name &name);
 
     private:
         std::string firstName;
         std::string surname;
-        std::string secondName;
-        std::string thirdName;
+        std::experimental::optional<std::string> secondName;
+        std::experimental::optional<std::string> thirdName;
 
     };
 

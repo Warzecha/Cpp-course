@@ -2,149 +2,187 @@
 // Created by torzmich on 20.03.18.
 //
 
+#include <regex>
 #include "Name.h"
 
-Name::Name(std::string firstName, std::string surname) : firstName(firstName), surname(surname) {}
+namespace model{
 
-const std::string &Name::getFirstName() const {
-    return firstName;
-}
+    Name::Name(std::string firstName, std::string surname) : firstName(firstName), surname(surname) {}
 
-const std::string &Name::getSurname() const {
-    return surname;
-}
 
-const std::string &Name::getSecondName() const {
-    return  secondName;
-}
 
-const std::string &Name::getThirdName() const {
-    return thirdName;
-}
-
-void Name::setFirstName(const std::string &firstName) {
-    Name::firstName = firstName;
-}
-
-void Name::setSurname(const std::string &surname) {
-    Name::surname = surname;
-}
-
-Name::Name(std::string name) {
-
-    int spaces = 0;
-    for(int i = 0; name[i]!= '\0'; i++) {
-        if(name[i] == ' ')
-            spaces++;
+    void Name::setFirstName(const std::string &firstName) {
+        Name::firstName = firstName;
     }
 
-    if(spaces == 1) {
-        int space = name.find(' ');
-        firstName = name.substr(0,space);
-        surname = name.substr(space+1);
-    }
-    if(spaces == 2) {
-        int space = name.find(' ');
-        firstName = name.substr(0,space);
-        name = name.substr(space+1);
-        space = name.find(' ');
-        secondName = name.substr(0,space);
-        surname = name.substr(space+1);
-
+    void Name::setSurname(const std::string &surname) {
+        Name::surname = surname;
     }
 
-    if(spaces == 3) {
-        int space = name.find(' ');
-        firstName = name.substr(0,space);
-        name = name.substr(space+1);
-        space = name.find(' ');
-        secondName = name.substr(0,space);
-        name = name.substr(space+1);
-        space = name.find(' ');
-        thirdName = name.substr(0,space);
-        surname = name.substr(space+1);
+//    Name::Name(std::string name) {
+//
+//        int spaces = 0;
+//        for(int i = 0; name[i]!= '\0'; i++) {
+//            if(name[i] == ' ')
+//                spaces++;
+//        }
+//
+//        if(spaces == 1) {
+//            int space = name.find(' ');
+//            firstName = name.substr(0,space);
+//            surname = name.substr(space+1);
+//        }
+//        if(spaces == 2) {
+//            int space = name.find(' ');
+//            firstName = name.substr(0,space);
+//            name = name.substr(space+1);
+//            space = name.find(' ');
+//            secondName = name.substr(0,space);
+//            surname = name.substr(space+1);
+//
+//        }
+//
+//        if(spaces == 3) {
+//            int space = name.find(' ');
+//            firstName = name.substr(0,space);
+//            name = name.substr(space+1);
+//            space = name.find(' ');
+//            secondName = name.substr(0,space);
+//            name = name.substr(space+1);
+//            space = name.find(' ');
+//            thirdName = name.substr(0,space);
+//            surname = name.substr(space+1);
+//        }
+//    }
+
+    void Name::setSecondName(const std::string &secondName) {
+        Name::secondName = secondName;
     }
-}
 
-void Name::setSecondName(const std::string &secondName) {
-    Name::secondName = secondName;
-}
+    void Name::setThirdName(const std::string &thirdName) {
+        Name::thirdName = thirdName;
+    }
 
-void Name::setThirdName(const std::string &thirdName) {
-    Name::thirdName = thirdName;
-}
+    std::string Name::ToFullInitials() {
+        std::string initials;
+        if(!Name::secondName)
+            initials = Name::FirstName().substr(0,1) + ". " + Name::Surname().substr(0,1) + ".";
+        else if(!Name::ThirdName() && Name::SecondName())
+            initials = Name::FirstName().substr(0,1) + ". " + Name::SecondName().value().substr(0,1) + ". " + Name::Surname().substr(0,1) + ".";
+        else initials = Name::FirstName().substr(0,1) + ". " + Name::SecondName().value().substr(0,1) + ". " + Name::ThirdName().value().substr(0,1) + ". " + Name::Surname().substr(0,1) + ".";
 
-std::string Name::ToFullInitials() {
-    std::string initials;
-    if(Name::getSecondName() == "")
-        initials = Name::getFirstName().substr(0,1) + "." + Name::getSurname().substr(0,1) + ".";
-    else if(Name::getThirdName() == "" && Name::getSecondName()!= "")
-        initials = Name::getFirstName().substr(0,1) + "." + Name::getSecondName().substr(0,1) + "." + Name::getSurname().substr(0,1) + ".";
-    else initials = Name::getFirstName().substr(0,1) + "." + Name::getSecondName().substr(0,1) + "." + Name::getThirdName().substr(0,1) + "." + Name::getSurname().substr(0,1) + ".";
+        return initials;
+    }
 
-    return initials;
-}
+    std::string Name::ToFirstNamesInitials() {
+        std::string initials;
+        if(!Name::SecondName())
+            initials = Name::FirstName().substr(0,1) + ". " + Name::Surname();
+        else if(!Name::ThirdName() && Name::SecondName())
+            initials = Name::FirstName().substr(0,1) + ". " + Name::SecondName().value().substr(0,1) + ". " + Name::Surname();
+        else initials = Name::FirstName().substr(0,1) + ". " + Name::SecondName().value().substr(0,1) + ". " + Name::ThirdName().value().substr(0,1) + ". " + Name::Surname();
 
-std::string Name::ToFirstNamesInitials() {
-    std::string initials;
-    if(Name::getSecondName() == "")
-        initials = Name::getFirstName().substr(0,1) + "." + Name::getSurname();
-    else if(Name::getThirdName() == "" && Name::getSecondName()!= "")
-        initials = Name::getFirstName().substr(0,1) + "." + Name::getSecondName().substr(0,1) + "." + Name::getSurname();
-    else initials = Name::getFirstName().substr(0,1) + "." + Name::getSecondName().substr(0,1) + "." + Name::getThirdName().substr(0,1) + "." + Name::getSurname();
+        return initials;
+    }
 
-    return initials;
-}
+    std::string Name::ToSurnameNames() {
+        if(!Name::SecondName())
+            return Name::Surname() + " " + Name::FirstName();
+        else if(!Name::ThirdName() && Name::SecondName())
+            return  Name::Surname() + " " + Name::FirstName() + " " + Name::SecondName().value();
+        else return Name::Surname() + " " + Name::FirstName() + " " + Name::SecondName().value() + " " + Name::ThirdName().value();
 
-std::string Name::ToSurnameNames() {
-    if(Name::getSecondName() == "")
-        return Name::getSurname() + " " + Name::getFirstName();
-    else if(Name::getThirdName() == "" && Name::getSecondName()!= "")
-        return  Name::getSurname() + " " + Name::getFirstName() + " " + Name::getSecondName();
-    else return Name::getSurname() + " " + Name::getFirstName() + " " + Name::getSecondName() + " " + Name::getThirdName();
+    }
 
-}
+    std::string Name::ToNamesSurname() {
+        if(!Name::SecondName())
+            return Name::FirstName() + " " + Name::Surname();
+        else if(!Name::ThirdName() && Name::SecondName())
+            return  Name::FirstName() + " " + Name::SecondName().value() + " " + Name::Surname();
+        else return Name::FirstName() + " " + Name::SecondName().value() + " " + Name::ThirdName().value() + " " + Name::Surname();
+    }
 
-std::string Name::ToNamesSurname() {
-    if(Name::getSecondName() == "")
-        return Name::getFirstName() + " " + Name::getSurname();
-    else if(Name::getThirdName() == "" && Name::getSecondName()!= "")
-        return  Name::getFirstName() + " " + Name::getSecondName() + " " + Name::getSurname();
-    else return Name::getFirstName() + " " + Name::getSecondName() + " " + Name::getThirdName() + " " + Name::getSurname();
-}
-
-bool Name::IsBeforeBySurname(std::string surname) {
-    const char* baseLetter = Name::getSurname().c_str();
-    const char* givenLetter = surname.c_str();
-    int i = 0;
-    while(surname[i]!= '\0') {
-        if(baseLetter[i] > givenLetter[i]) {
-            return true;
-        } else if (baseLetter[i] < givenLetter[i]) {
-            return false;
-        } else {
-            i++;
+    bool Name::IsBeforeBySurname(Name & name) {
+        const char* baseLetter = Name::Surname().c_str();
+        const char* givenLetter = surname.c_str();
+        int i = 0;
+        while(surname[i]!= '\0') {
+            if(baseLetter[i] > givenLetter[i]) {
+                return true;
+            } else if (baseLetter[i] < givenLetter[i]) {
+                return false;
+            } else {
+                i++;
+            }
         }
+
+        return false;
+
     }
 
-    return false;
-
-}
-
-bool Name::IsBeforeByFirstName(std::string firstname) {
-    const char* baseLetter = Name::getFirstName().c_str();
-    const char* givenLetter = firstname.c_str();
-    int i = 0;
-    while(surname[i]!= '\0') {
-        if(baseLetter[i] > givenLetter[i]) {
-            return true;
-        } else if (baseLetter[i] < givenLetter[i]) {
-            return false;
-        } else {
-            i++;
+    bool Name::IsBeforeByFirstName(Name & name) {
+        const char* baseLetter = Name::FirstName().c_str();
+        const char* givenLetter = name.firstName.c_str();
+        int i = 0;
+        while(surname[i]!= '\0') {
+            if(baseLetter[i] > givenLetter[i]) {
+                return true;
+            } else if (baseLetter[i] < givenLetter[i]) {
+                return false;
+            } else {
+                i++;
+            }
         }
+
+        return false;
+
     }
 
-    return false;
+    std::string Name::FirstName() const {
+        return firstName;
+    }
+
+    std::experimental::optional<std::string> Name::SecondName() const {
+        return secondName;
+    }
+
+    std::experimental::optional<std::string> Name::ThirdName() const {
+        return thirdName;
+    }
+
+    std::string Name::Surname() const {
+        return surname;
+    }
+
+    Name::Name(std::string name_str) {
+
+        std::regex full_expression("^(\\w+)\\s+(\\w+)\\s+(\\w+)\\s+(\\w+)");
+        std::regex second_name_expression("^(\\w+)\\s+(\\w+)\\s+(\\w+)");
+        std::regex just_surname_expression("^(\\w+)\\s+(\\w+)");
+        std::cmatch m;
+
+        const char * name= name_str.c_str();
+        if(std::regex_match(name, m, full_expression))
+        {
+            firstName = m[1].str();
+            secondName = m[2].str();
+            thirdName = m[3].str();
+            surname = m[4].str();
+        }else if(std::regex_match(name, m, second_name_expression))
+        {
+            firstName = m[1].str();
+            secondName = m[2].str();
+            surname = m[3].str();
+        }else if(std::regex_match(name, m, just_surname_expression))
+        {
+            firstName = m[1].str();
+            surname = m[2].str();
+        }
+
+
+
+    }
+
 
 }
+

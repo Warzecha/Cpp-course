@@ -7,6 +7,9 @@
 
 #include <experimental/optional>
 #include <string>
+#include <vector>
+#include <map>
+
 
 
 namespace nets{
@@ -16,8 +19,10 @@ namespace nets{
 
 
         JsonValue(int value);
-        JsonValue(float value);
+        JsonValue(double value);
         JsonValue(std::string str);
+        JsonValue(const char* str);
+
         JsonValue(bool value);
         JsonValue(const std::vector<JsonValue>& _vector);
         JsonValue(const std::map<std::string, JsonValue>& obj_map);
@@ -30,7 +35,7 @@ namespace nets{
 
 
         std::experimental::optional <int> integer;
-        std::experimental::optional <float> floating_point;
+        std::experimental::optional <double> floating_point;
         std::experimental::optional <bool> boolean;
         std::experimental::optional <std::string> str;
         std::experimental::optional <std::vector<JsonValue>> vector;

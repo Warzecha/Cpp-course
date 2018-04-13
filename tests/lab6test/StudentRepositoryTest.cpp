@@ -7,6 +7,7 @@
 #include <MemLeakTest.h>
 #include <Student.h>
 
+
 using ::academia::StudentRepository;
 using ::academia::StudyYear;
 using ::academia::Student;

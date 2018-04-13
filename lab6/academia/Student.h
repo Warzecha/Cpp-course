@@ -2,8 +2,8 @@
 // Created by damian on 10.04.18.
 //
 
-#ifndef JIMP_EXERCISES_STUDENTREPOSITORY_H
-#define JIMP_EXERCISES_STUDENTREPOSITORY_H
+#ifndef JIMP_EXERCISES_STUDENT_H
+#define JIMP_EXERCISES_STUDENT_H
 
 #include <string>
 #include <ostream>

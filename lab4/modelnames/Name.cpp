@@ -103,39 +103,11 @@ namespace model{
     }
 
     bool Name::IsBeforeBySurname(Name & name) {
-        const char* baseLetter = Name::Surname().c_str();
-        const char* givenLetter = surname.c_str();
-        int i = 0;
-        while(surname[i]!= '\0') {
-            if(baseLetter[i] > givenLetter[i]) {
-                return true;
-            } else if (baseLetter[i] < givenLetter[i]) {
-                return false;
-            } else {
-                i++;
-            }
-        }
-
-        return false;
-
+        return (surname.compare(name.surname)) < 0;
     }
 
     bool Name::IsBeforeByFirstName(Name & name) {
-        const char* baseLetter = Name::FirstName().c_str();
-        const char* givenLetter = name.firstName.c_str();
-        int i = 0;
-        while(surname[i]!= '\0') {
-            if(baseLetter[i] > givenLetter[i]) {
-                return true;
-            } else if (baseLetter[i] < givenLetter[i]) {
-                return false;
-            } else {
-                i++;
-            }
-        }
-
-        return false;
-
+        return (firstName.compare(name.firstName)) < 0;
     }
 
     std::string Name::FirstName() const {

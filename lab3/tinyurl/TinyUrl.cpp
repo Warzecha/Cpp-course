@@ -30,10 +30,10 @@ namespace tinyurl {
         while (toChange) {
             type = (int) (*state)[elementAdress];
             if (type == 57) {
-                (*state)[elementAdress] = 'a';
+                (*state)[elementAdress] = 'A';
                 toChange = false;
             } else if (type == 90) {
-                (*state)[elementAdress] = 'A';
+                (*state)[elementAdress] = 'a';
                 toChange = false;
             } else if (type == 122) {
                 (*state)[elementAdress] = '0';

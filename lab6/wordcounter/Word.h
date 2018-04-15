@@ -26,6 +26,8 @@ namespace datastructures
 
         bool operator!=(const Word &rhs) const;
 
+        const std::string &getWord() const;
+
 
     private:
         std::string word;

@@ -7,8 +7,12 @@
 
 #include <string>
 #include <map>
+#include <ostream>
+#include <istream>
 #include "Counts.h"
 #include "Word.h"
+#include <set>
+#include <vector>
 
 namespace datastructures
 {
@@ -17,16 +21,22 @@ namespace datastructures
     public:
 
         WordCounter(const std::initializer_list<Word> initializer_list);
+
+        //friend std::ostream &operator<<(std::ostream &os, const WordCounter &counter);
+
         WordCounter();
 
         int DistinctWords() const ;
         int TotalWords() const ;
 
+        void addWord(Word new_word);
+
         int operator[](std::string to_find) const ;
 
         std::set<Word> Words() const ;
 
-
+        friend std::ostream &operator<<(std::ostream &os, const WordCounter &counter);
+        static std::vector<std::pair<Word, Counts>> FromInputStream(std::istream in);
 
     private:
         std::map<datastructures::Word, Counts> dictionary;

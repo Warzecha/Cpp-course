@@ -34,4 +34,8 @@ namespace datastructures
     bool Word::operator!=(const Word &rhs) const {
         return !(rhs == *this);
     }
+
+    const std::string &Word::getWord() const {
+        return word;
+    }
 }

@@ -3,11 +3,19 @@
 //
 
 #include <set>
+#include <vector>
+#include <algorithm>
+#include <iostream>
 #include "WordCounter.h"
 
 namespace datastructures
 {
-
+    struct {
+        bool operator()(std::pair<Word, Counts> a, std::pair<Word, Counts> b) const
+        {
+            return a.second < b.second;
+        }
+    } customLess;
 
     WordCounter::WordCounter() = default;
 
@@ -67,6 +75,65 @@ namespace datastructures
 
 
         return set;
+    }
+
+    std::ostream &operator<<(std::ostream &os, const WordCounter &counter) {
+        std::vector<std::pair<Word, Counts>> vec;
+
+        for( auto w : counter.dictionary)
+        {
+            vec.push_back(w);
+        }
+        std::sort(vec.begin(), vec.end(), customLess);
+
+        for (auto w : vec)
+        {
+            os << w.first.getWord() << " - " << w.second.getCounts() << std::endl;
+
+        }
+
+
+
+        return os;
+    }
+
+    std::vector<std::pair<Word, Counts>> WordCounter::FromInputStream(std::istream in) {
+
+        std::string str;
+        WordCounter wordCounter;
+
+        while(in >> str)
+        {
+            in >> str;
+            wordCounter.addWord(Word(str));
+        }
+
+
+        std::vector<std::pair<Word, Counts>> to_return;
+
+        for( auto w : wordCounter.dictionary)
+        {
+            to_return.push_back(w);
+
+        }
+
+
+        return to_return;
+    }
+
+    void WordCounter::addWord(Word new_word) {
+
+        auto it = dictionary.find(new_word);
+        if(it != dictionary.end())
+        {
+            (it->second).operator++();
+        }
+        else
+        {
+            auto pair = std::make_pair(new_word, Counts(1));
+            dictionary.insert(pair);
+        }
+
     }
 
 

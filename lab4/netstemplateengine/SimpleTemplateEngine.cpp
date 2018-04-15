@@ -27,16 +27,31 @@ nets::View::View(const std::string &object_template) : object_template(object_te
 std::string nets::View::Render(const std::unordered_map<std::string, std::string> &model) const {
 
     std::string str_copy = this->object_template;
+    std::vector<std::string> replace_vector;
+    std::cmatch match;
+
+    std::regex injection("\\{\\{\\w*\\}\\}");
+
+
+
 
     for(auto m : model)
     {
         std::string to_find = "{{"+m.first+"}}";
         std::string to_replace = m.second;
+        if(std::regex_match(to_replace.begin(), to_replace.end(), injection))
+        {
+            replace_vector.push_back(to_replace);
+            to_replace = "{{"+ std::to_string(replace_vector.size() - 1) + "}}";
+        }
         str_copy = find_and_replace(str_copy,to_find, to_replace);
     }
 
+
+
+
     const char * str = str_copy.c_str();
-    std::regex expresion_with_brackets(".*(\\{\\{[A-Za-z0-9_]+\\}\\}).*");
+    std::regex expresion_with_brackets(".*(\\{\\{[A-Za-z_][A-Za-z0-9_]*\\}\\}).*");
     std::cmatch m;
 
     //std::cout << str;
@@ -53,7 +68,14 @@ std::string nets::View::Render(const std::unordered_map<std::string, std::string
 
     }
 
+    str_copy = str;
 
+    for (int i = 0; i < replace_vector.size(); ++i) {
+
+        std::string to_find = "{{" + std::to_string(i) + "}}";
+        std::string to_replace = replace_vector[i];
+        str_copy = find_and_replace(str_copy,to_find, to_replace);
+    }
 
 
 

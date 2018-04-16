@@ -84,12 +84,16 @@ std::string AddBackslash(std::string str)
         {
             std::string temp;
 
+            //std::cout << std::endl;;
+
             for(char c : str.value())
             {
+                //std::cout<<c<<std::endl;
+
                 if( c == '\\')
-                    temp += "\\";
+                    temp += R"(\)"s;
                 if(c == '\"')
-                    temp += "\"";
+                    temp += R"(\")"s;
                 else
                     temp += c;
 

@@ -7,7 +7,9 @@
 
 namespace model{
 
-    Name::Name(std::string firstName, std::string surname) : firstName(firstName), surname(surname) {}
+    Name::Name(std::string firstName, std::string surname) : firstName(firstName), surname(surname) {
+
+    }
 
 
 

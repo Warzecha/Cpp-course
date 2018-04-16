@@ -4,34 +4,23 @@
 #include "Name.h"
 #include <memory>
 
-
+using namespace model;
 int main() {
 
-    std::unique_ptr<Name> name = std::make_unique<Name>("Jan","Kowalski");
-    std::unique_ptr<Name> name2 = std::make_unique<Name>("Dominik Domin Dolek Nowak");
 
-    std::cout<<name->ToFullInitials()<<std::endl;
-    std::cout<<name2->ToFullInitials()<<std::endl;
+    Name imie {"First\t\tAndSecond\n\r \tSurname"};
+    try
+    {
+        std::cout<< imie.SecondName().value();
+    }
 
-    std::cout<<name->ToFirstNamesInitials()<<std::endl;
-    std::cout<<name2->ToFirstNamesInitials()<<std::endl;
+    catch(int e)
+    {
+        std::cout<<"err: "<<e;
+    }
 
-    std::cout<<name->ToSurnameNames()<<std::endl;
-    std::cout<<name2->ToSurnameNames()<<std::endl;
 
-    std::cout<<name->ToNamesSurname()<<std::endl;
-    std::cout<<name2->ToNamesSurname()<<std::endl;
 
-    std::string surname = "Nowak";
-    std::string firstName = "Pitter";
 
-    if(name->IsBeforeBySurname(surname))
-        std::cout<<surname<<" jest wyzej w alfabecie niz "<<name->getSurname()<<std::endl;
-    else std::cout<<surname<<" jest nizej w alfabecie niz "<<name->getSurname()<<std::endl;
 
-    if(name2->IsBeforeByFirstName(firstName))
-        std::cout<<firstName<<" jest wyzej w alfabecie niz "<<name2->getFirstName();
-    else std::cout<<firstName<<" jest nizej w alfabecie niz "<<name2->getFirstName();
-
-    return 0;
 }

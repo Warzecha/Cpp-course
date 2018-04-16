@@ -15,14 +15,19 @@ using ::std::literals::operator""s;
 int main() {
 
 
-    std::string string1 = R"(\\"ghh\")"s;
-    std::string string2;
+    std::string string1 = R"(\\\\\\\"http:\\\\\\\"klmno)"s;
+    std::string string2 = R"("\\\\\\\\\\\\\\\"http:\\\\\\\\\\\\\\\"klmno")"s;
+    std::string string3 = R"("abc")"s;
 
 
 
 
-    std::cout<<string1<<std::endl;
-    nets::JsonValue val(string1);
+    std::cout<<string3<<std::endl;
+    nets::JsonValue val(string3);
     std::cout<<val.ToString()<<std::endl;
+
+    //std::cout << string2;
+
+    //std::cout << std::to_string(val.ToString() == string2);
 
 }

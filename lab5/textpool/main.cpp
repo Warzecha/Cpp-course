@@ -3,17 +3,22 @@
 //
 
 #include <TextPool.h>
+#include <iostream>
 
 using namespace pool;
 
 int main() {
 
-    TextPool pool = {"babka", "ciotka", "matka", "prababka"};
+    //"babka", "ciotka", "matka", "prababka"
 
-    auto s1 = pool.Intern("babka");
+    TextPool pool {"a", "b", "c", "aaa", "ld"};
 
-    auto s2 = pool.Intern("babka")
+//    auto s1 = pool.Intern("babka");
+//
+//    auto s2 = pool.Intern("babka")
+//
 
+    std::cout << pool.StoredStringCount();
 
 
     return 0;

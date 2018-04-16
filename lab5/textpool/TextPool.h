@@ -10,8 +10,7 @@
 #include <string>
 #include <experimental/string_view>
 #include <set>
-
-#include <vector>
+#include <algorithm>
 
 namespace pool {
 
@@ -20,15 +19,20 @@ namespace pool {
 
         TextPool();
 
-        TextPool(std::initializer_list<std::string> &words);
+        TextPool(const std::initializer_list<const std::string > &words);
+
+        TextPool( TextPool && other);
+        TextPool &operator=(TextPool &&other);
 
         std::experimental::string_view Intern(const std::string &str);
 
         size_t StoredStringCount() const;
 
+        virtual ~TextPool();
+
     private:
 
-        std::vector<std::string> words;
+        std::set<std::experimental::string_view > set = {};
 
 
     };

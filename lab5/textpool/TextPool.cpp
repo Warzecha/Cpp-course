@@ -4,36 +4,53 @@
 
 #include "TextPool.h"
 
-using namespace pool;
+namespace pool
+{
 
-size_t TextPool::StoredStringCount() const {
-    return words.size();
-}
 
-std::experimental::string_view TextPool::Intern(const std::string &str) {
 
-    bool isPresent = false;
-    int wordI = 0;
-    if(StoredStringCount() == 0) {
-        words.push_back(str);
-        return &words[0];
+    TextPool::TextPool() {
+
     }
-    else {
-        for (std::vector::iterator i = words.begin(); i != words.end(); i++) {
-            if (str == words[i]) {
-                isPresent = true;
-                break;
-            }
-            wordI++;
+
+    size_t TextPool::StoredStringCount() const {
+        return set.size();
+    }
+
+    TextPool::~TextPool() {
+        set.clear();
+
+    }
+
+    std::experimental::string_view TextPool::Intern(const std::string &str) {
+
+            set.emplace(std::experimental::string_view(str.c_str(),str.length()));
+            return *set.find(str);
         }
 
-        if (!isPresent) {
-            words.push_back(str);
-            return &words[words.size() - 1];
-        }
-        else
-            return &words[wordI];
-    }
-}
 
-TextPool::TextPool(std::initializer_list<std::string> &words) : words(words) {};
+    TextPool::TextPool(const std::initializer_list<const std::string> &words) {
+        for (auto w : words)
+        {
+            set.insert(std::experimental::string_view(w));
+        }
+    }
+
+    TextPool::TextPool(TextPool &&other): set(other.set) {
+        //std::swap(set, other.set);
+        //std::swap(set, other.set);
+        other.set.clear();
+    }
+
+    TextPool &TextPool::operator=(TextPool &&other) {
+        if(this!=&other) // prevent self-move
+        {
+            set.clear();
+            set = other.set;
+            other.set.clear();
+        }
+        return *this;
+    }
+
+
+}

@@ -44,8 +44,8 @@ namespace model{
     private:
         std::string firstName;
         std::string surname;
-        std::experimental::optional<std::string> secondName;
-        std::experimental::optional<std::string> thirdName;
+        std::experimental::optional<std::string> secondName = {};
+        std::experimental::optional<std::string> thirdName = {};
 
     };
 

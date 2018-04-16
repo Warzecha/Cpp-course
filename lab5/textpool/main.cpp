@@ -20,6 +20,10 @@ int main() {
 
     std::cout << pool.StoredStringCount();
 
+    std::set<std::experimental::string_view > set {"a", "b", "c", "aaa", "ld"};
+
+    std::cout << set.size();
+
 
     return 0;
 }

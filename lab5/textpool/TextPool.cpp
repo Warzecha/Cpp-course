@@ -24,25 +24,41 @@ namespace pool
 
     std::experimental::string_view TextPool::Intern(const std::string &str) {
 
-            set.emplace(std::experimental::string_view(str.c_str(),str.length()));
-            return *set.find(str);
+//            set.emplace(std::experimental::string_view(str.c_str(),str.length()));
+//            return *set.find(str);
+        bool flag = true;
+        for (auto &n : this->set) {
+            if (n == str){
+                flag = false;
+                return n;
+            }
         }
+        if (flag){
+            set.emplace(str);
+            return Intern(str);
+        }
+
+
+    }
 
 
     TextPool::TextPool(const std::initializer_list<const std::string> &words) {
-        for (auto w : words)
-        {
-            set.insert(std::experimental::string_view(w));
+
+        for (const auto &word : words) {
+
+            set.emplace(word);
+
         }
     }
 
-    TextPool::TextPool(TextPool &&other): set(other.set) {
+    TextPool::TextPool(TextPool &&other) : set(other.set) {
         //std::swap(set, other.set);
         //std::swap(set, other.set);
+        //other.set.clear();
         other.set.clear();
     }
 
-    TextPool &TextPool::operator=(TextPool &&other) {
+    TextPool & TextPool::operator=(TextPool && other) {
         if(this!=&other) // prevent self-move
         {
             set.clear();

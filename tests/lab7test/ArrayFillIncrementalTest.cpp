@@ -16,7 +16,7 @@ class ArrayFillIncrementalTests : public ::testing::Test, MemLeakTest {
 TEST_F(ArrayFillIncrementalTests, FillsArrayByConsequentIntegersStartingFromThree) {
   std::vector<int> vs;
   IncrementalFill uniform {3};
-  ArrayFiller(35, uniform, &vs);
+  FillArray(35, uniform, &vs);
   for (int i = 0, expected = 3; i < 35; i++, expected++) {
     EXPECT_EQ(expected, vs.at(i));
   }
@@ -25,7 +25,7 @@ TEST_F(ArrayFillIncrementalTests, FillsArrayByConsequentIntegersStartingFromThre
 TEST_F(ArrayFillIncrementalTests, FillsArrayWithIntegersStartingFromMinusNineStepFive) {
   std::vector<int> vs;
   IncrementalFill uniform {-9, 5};
-  ArrayFiller(35, uniform, &vs);
+  FillArray(35, uniform, &vs);
   for (int i = 0, expected = -9; i < 35; i++, expected+=5) {
     EXPECT_EQ(expected, vs.at(i));
   }

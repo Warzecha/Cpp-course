@@ -17,7 +17,7 @@ class ArrayFillSquaredTests : public ::testing::Test, MemLeakTest {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresOfIndices) {
   std::vector<int> vs;
   SquaredFill filler {};
-  ArrayFiller(35, filler, &vs);
+  FillArray(35, filler, &vs);
   for (int i = 0; i < 35; i++) {
     EXPECT_EQ(i*i, vs.at(i));
   }
@@ -26,7 +26,7 @@ TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresOfIndices) {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMutipliedByConstant) {
   std::vector<int> vs;
   SquaredFill filler {4};
-  ArrayFiller(14, filler, &vs);
+  FillArray(14, filler, &vs);
   for (int i = 0; i < 14; i++) {
     EXPECT_EQ(4*i*i, vs.at(i));
   }
@@ -35,7 +35,7 @@ TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMutipliedByConstant) {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMultipliedByConstantAndAddedOffset) {
   std::vector<int> vs;
   SquaredFill filler {1,4};
-  ArrayFiller(100, filler, &vs);
+  FillArray(100, filler, &vs);
   for (int i = 0; i < 100; i++) {
     EXPECT_EQ(i*i+4, vs.at(i));
   }

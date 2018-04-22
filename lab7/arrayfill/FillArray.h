@@ -5,6 +5,8 @@
 #ifndef JIMP_EXERCISES_ARRAYFILL_H
 #define JIMP_EXERCISES_ARRAYFILL_H
 
+#include <memory>
+#include <random>
 #include <vector>
 
 namespace arrays
@@ -35,7 +37,7 @@ namespace arrays
     class IncrementalFill : public ArrayFiller
     {
     public:
-        IncrementalFill(int start, int step = 0);
+        IncrementalFill(int start, int step = 1);
 
         int Value(int index) override;
 
@@ -45,8 +47,43 @@ namespace arrays
 
     };
 
+    class SquaredFill : public ArrayFiller
+    {
 
-    void ArrayFill(int size, ArrayFiller &arrayFill, std::vector<int> *vector);
+    public:
+        SquaredFill(int a = 1, int b = 0);
+        int Value(int index) override;
+
+
+    private:
+        int a;
+        int b;
+
+
+
+    };
+
+
+
+    class RandomFill : public ArrayFiller
+    {
+    public:
+
+
+        RandomFill(std::unique_ptr<std::default_random_engine> generator, std::unique_ptr<std::uniform_int_distribution<int>> distribution);
+
+        int Value(int index) override;
+
+    private:
+
+        std::unique_ptr<std::default_random_engine> engine;
+        std::unique_ptr<std::uniform_int_distribution<int>> distribution;
+
+    };
+
+
+    void FillArray(int size, ArrayFiller &arrayFill, std::vector<int> *vector);
+
 
 }
 

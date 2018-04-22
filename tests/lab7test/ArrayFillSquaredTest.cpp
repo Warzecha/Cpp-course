@@ -5,10 +5,10 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <MemLeakTest.h>
-#include <ArrayFill.h>
+#include <FillArray.h>
 
 using ::arrays::SquaredFill;
-using ::arrays::FillArray;
+using ::arrays::ArrayFiller;
 
 class ArrayFillSquaredTests : public ::testing::Test, MemLeakTest {
 
@@ -17,7 +17,7 @@ class ArrayFillSquaredTests : public ::testing::Test, MemLeakTest {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresOfIndices) {
   std::vector<int> vs;
   SquaredFill filler {};
-  FillArray(35, filler, &vs);
+  ArrayFiller(35, filler, &vs);
   for (int i = 0; i < 35; i++) {
     EXPECT_EQ(i*i, vs.at(i));
   }
@@ -26,7 +26,7 @@ TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresOfIndices) {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMutipliedByConstant) {
   std::vector<int> vs;
   SquaredFill filler {4};
-  FillArray(14, filler, &vs);
+  ArrayFiller(14, filler, &vs);
   for (int i = 0; i < 14; i++) {
     EXPECT_EQ(4*i*i, vs.at(i));
   }
@@ -35,7 +35,7 @@ TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMutipliedByConstant) {
 TEST_F(ArrayFillSquaredTests, FillsArrayWithSquaresMultipliedByConstantAndAddedOffset) {
   std::vector<int> vs;
   SquaredFill filler {1,4};
-  FillArray(100, filler, &vs);
+  ArrayFiller(100, filler, &vs);
   for (int i = 0; i < 100; i++) {
     EXPECT_EQ(i*i+4, vs.at(i));
   }

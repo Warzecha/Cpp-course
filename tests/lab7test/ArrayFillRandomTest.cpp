@@ -7,10 +7,10 @@
 #include <memory>
 #include <random>
 #include <MemLeakTest.h>
-#include <ArrayFill.h>
+#include <FillArray.h>
 
 using ::arrays::RandomFill;
-using ::arrays::FillArray;
+using ::arrays::ArrayFiller;
 using ::std::default_random_engine;
 using ::std::uniform_int_distribution;
 using ::std::make_unique;
@@ -24,7 +24,7 @@ TEST_F(ArrayFillRandomTests, FillsArrayWithRandomValues) {
   auto generator = make_unique<default_random_engine>();
   auto distribution = make_unique<uniform_int_distribution<int>>(1,6);
   RandomFill filler {move(generator), move(distribution)};
-  FillArray(35, filler, &vs);
+  ArrayFiller(35, filler, &vs);
 
   auto expected_generator = default_random_engine {};
   auto expected_distribution = uniform_int_distribution<int> {1,6};

@@ -6,7 +6,7 @@
 #define JIMP_EXERCISES_COMPARABLE_H
 
 
-#include "../../lab6/academia/Student.h"
+#include <Student.h>
 
 namespace academia
 {

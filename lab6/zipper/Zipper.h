@@ -10,23 +10,40 @@
 #include "string"
 
 
-class Zipper {
-
+class ZipperIterator {
 public:
-    Zipper();
-    Zipper(std::vector<std::string> text, std::vector<int> value);
-    ~Zipper();
-    Zipper(std::vector::iterator begin, std::vector::iterator end;
 
-    static Zipper zip(std::vector<std::string> text, std::vector<int> value);
+    ZipperIterator(std::pair <std::string, int> *ptr);
 
-    Zipper ZipperIterator(std::vector<std::string> text, std::vector<int> value);
-
+    std::pair<std::string,int> operator*() const; //wmagane w linii 74
+    ZipperIterator &operator++(); //wymagane w linii 73 for(_;_;TU)
+    bool operator!=(const ZipperIterator &other) const; //wymagane w linii 73 for(_;TU;_)
 private:
-    std::vector<std::string> text;
-    std::vector<int> value;
-    std::vector::iterator begin;
-    std::vector::iterator end;
+
+    std::pair <std::string, int> *ptr;
+
+    //TODO
+};
+
+//umożliwia przeglądanie dwóch wektorów na raz, w jednej pętli range-for
+class Zipper {
+public:
+    static Zipper zip(const std::vector<std::string> &vs, const std::vector<int> &vi);
+
+    ZipperIterator begin(); //wymagane w linii 73 for(TU;_;_)
+    ZipperIterator end(); //wymagane w linii 73 for(_;TU;_)
+private:
+    //TODO
+
+
+    std::vector<std::pair<std::string, int>> vector;
+
+
+    ZipperIterator _begin;
+    ZipperIterator _end;
+    ZipperIterator right_begin;
+    ZipperIterator right_end;
+
 
 };
 

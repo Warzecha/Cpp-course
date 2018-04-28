@@ -1,5 +1,5 @@
 //
-// Created by damian on 12.04.18.
+// Created by warzecha on 26.04.18.
 //
 
 #include "StudentRepository.h"
@@ -7,6 +7,7 @@
 
 namespace academia
 {
+
     StudentRepository::StudentRepository(const std::initializer_list<Student> initializer_list) {
 
         studentCount = initializer_list.size();
@@ -28,6 +29,11 @@ namespace academia
     }
 
 
+    bool StudentRepository::operator==(const StudentRepository &rhs) const {
+        return map == rhs.map;
+    }
+
+    StudentRepository::StudentRepository() {
+        studentCount = 0;
+    }
 }
-
-

@@ -32,7 +32,7 @@ namespace pool {
 
     private:
 
-        std::set<std::experimental::string_view > set = {};
+        std::set<std::string > set = {};
 
 
     };

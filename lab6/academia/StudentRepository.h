@@ -1,24 +1,27 @@
 //
-// Created by damian on 12.04.18.
+// Created by warzecha on 26.04.18.
 //
 
 #ifndef JIMP_EXERCISES_STUDENTREPOSITORY_H
 #define JIMP_EXERCISES_STUDENTREPOSITORY_H
 
-#include <map>
 #include "Student.h"
-#include "StudyYear.h"
 
-namespace academia {
+namespace academia
+{
     class StudentRepository {
 
     public:
 
         StudentRepository (std::initializer_list<Student> initializer_list);
 
+        StudentRepository();
+
         Student &operator[](const std::string & _id);
 
         unsigned long StudentCount() const ;
+
+        bool operator==(const StudentRepository &rhs) const;
 
 
     private:
@@ -28,8 +31,7 @@ namespace academia {
 
 
     };
+
 }
-
-
 
 #endif //JIMP_EXERCISES_STUDENTREPOSITORY_H

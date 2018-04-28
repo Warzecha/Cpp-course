@@ -99,7 +99,7 @@ TEST_P(TrickySimpleJsonTestTests, CreationOfTrickyJsonObjectsWithTrickyNameValue
 std::vector<TrickyTestParam> trickyJsonStringTestData
     {{R"("abc")"s, R"("\"abc\"")"s},
      {R"(efg"hjk")"s, R"("efg\"hjk\"")"s},
-     {R"(\"abc\")"s, R"("\\\"abc\\\"")"s},
+     {R"(\"abcp\")"s, R"("\\\"abcp\\\"")"s},
      {R"(\\"ghh\")"s, R"("\\\\\"ghh\\\"")"s},
      {R"(\\\"klmnopr\\\")"s, R"("\\\\\\\"klmnopr\\\\\\\"")"s},
      {R"(\\\\\\\"http:\\\\\\\"klmno)"s, R"("\\\\\\\\\\\\\\\"http:\\\\\\\\\\\\\\\"klmno")"s},

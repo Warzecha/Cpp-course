@@ -15,9 +15,10 @@ using ::std::literals::operator""s;
 int main() {
 
 
-    std::string string1 = R"(\\\\\\\"http:\\\\\\\"klmno)"s;
-    std::string string2 = R"("\\\\\\\\\\\\\\\"http:\\\\\\\\\\\\\\\"klmno")"s;
+    //std::string string1 = R"(\\\\\\\"http:\\\\\\\"klmno)"s;
+    //std::string string2 = R"("\\\\\\\\\\\\\\\"http:\\\\\\\\\\\\\\\"klmno")"s;
     std::string string3 = R"("abc")"s;
+    std::string string4 = R"(efg"hjk")"s;
 
 
 

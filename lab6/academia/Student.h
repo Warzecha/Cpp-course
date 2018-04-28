@@ -7,7 +7,9 @@
 
 #include <string>
 #include <ostream>
+#include <map>
 #include "StudyYear.h"
+
 
 namespace academia
 {
@@ -18,7 +20,8 @@ namespace academia
                 const std::string &program, const StudyYear &studyYear);
 
         Student(const std::string &id, const std::string &first_name, const std::string &last_name,
-                const std::string &program, const int studyYear);
+                const std::string &program, int studyYear);
+
 
         Student();
 
@@ -52,6 +55,12 @@ namespace academia
 
 
     };
+
+
+
+
+
+
 }
 
 

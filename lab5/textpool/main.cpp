@@ -9,20 +9,17 @@ using namespace pool;
 
 int main() {
 
-    //"babka", "ciotka", "matka", "prababka"
+
 
     TextPool pool {"a", "b", "c", "aaa", "ld"};
 
-//    auto s1 = pool.Intern("babka");
-//
-//    auto s2 = pool.Intern("babka")
-//
+    TextPool pool2 {"x", "y"};
+    TextPool pool3 {"p"};
 
-    std::cout << pool.StoredStringCount();
 
-    std::set<std::experimental::string_view > set {"a", "b", "c", "aaa", "ld"};
 
-    std::cout << set.size();
+
+
 
 
     return 0;

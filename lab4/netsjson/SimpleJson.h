@@ -41,6 +41,7 @@ namespace nets{
         std::experimental::optional <std::vector<JsonValue>> vector;
         std::experimental::optional <std::map<std::string, JsonValue>> map;
 
+        std::string escapeString(std::string str) const;
     };
 
 

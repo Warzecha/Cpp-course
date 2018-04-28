@@ -5,8 +5,7 @@
 #include <memory>
 #include <type_traits>
 #include <MemLeakTest.h>
-#include <Student.h>
-
+#include <StudentRepository.h>
 
 using ::academia::StudentRepository;
 using ::academia::StudyYear;
@@ -23,7 +22,7 @@ class StudentRepositoryTests : public ::testing::Test, MemLeakTest {
 
 TEST_F(StudentRepositoryTests, IsAbleToCreateEmptyRepository) {
 
-  Student repository{};
+  StudentRepository repository{};
 
   EXPECT_EQ(0, repository.StudentCount());
 
@@ -31,9 +30,9 @@ TEST_F(StudentRepositoryTests, IsAbleToCreateEmptyRepository) {
 
 TEST_F(StudentRepositoryTests, IsAbleToInitlizeRepositoryByInilizerList) {
 
-  Student repository
-      {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
-       {"2035", "Orson", "Sabach", "górnictwo", 2}};
+  StudentRepository repository
+          {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
+           {"2035", "Orson", "Sabach", "górnictwo", 2}};
 
   EXPECT_EQ(3, repository.StudentCount());
 
@@ -41,9 +40,9 @@ TEST_F(StudentRepositoryTests, IsAbleToInitlizeRepositoryByInilizerList) {
 
 TEST_F(StudentRepositoryTests, IsAbleToRetriveStudentById) {
 
-  Student repository
-      {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
-       {"2035", "Orson", "Sabach", "górnictwo", 2}};
+  StudentRepository repository
+          {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
+           {"2035", "Orson", "Sabach", "górnictwo", 2}};
 
   EXPECT_EQ("2031", repository["2031"].Id());
   EXPECT_EQ("Katarzyna", repository["2031"].FirstName());
@@ -56,9 +55,9 @@ TEST_F(StudentRepositoryTests, IsAbleToRetriveStudentById) {
 
 TEST_F(StudentRepositoryTests, IsAbleToRetriveStudentByIdAndModifyItsStateInRepository) {
 
-  Student repository
-      {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
-       {"2035", "Orson", "Sabach", "górnictwo", 2}};
+  StudentRepository repository
+          {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
+           {"2035", "Orson", "Sabach", "górnictwo", 2}};
 
   EXPECT_EQ("2035", repository["2035"].Id());
   EXPECT_EQ("Orson", repository["2035"].FirstName());
@@ -81,13 +80,13 @@ TEST_F(StudentRepositoryTests, IsAbleToRetriveStudentByIdAndModifyItsStateInRepo
 
 TEST_F(StudentRepositoryTests, IsAbleToCompateTwoRepositories) {
 
-  Student repository
-      {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
-       {"2035", "Orson", "Sabach", "górnictwo", 2}};
+  StudentRepository repository
+          {{"2030", "Michał", "Karak", "architektura", 5}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
+           {"2035", "Orson", "Sabach", "górnictwo", 2}};
 
-  Student copy
-      {{"2035", "Orson", "Sabach", "górnictwo", 2}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
-       {"2030", "Michał", "Karak", "architektura", 5}};
+  StudentRepository copy
+          {{"2035", "Orson", "Sabach", "górnictwo", 2}, {"2031", "Katarzyna", "Bach", "informatyka", 3},
+           {"2030", "Michał", "Karak", "architektura", 5}};
 
   EXPECT_EQ(copy, repository);
   EXPECT_EQ(copy["2035"], repository["2035"]);

@@ -82,26 +82,7 @@ std::string AddBackslash(std::string str)
 
         if(this->str)
         {
-            std::string temp;
-
-            //std::cout << std::endl;;
-
-            for(char c : str.value())
-            {
-                //std::cout<<c<<std::endl;
-
-                if( c == '\\')
-                    temp += R"(\)"s;
-                if(c == '\"')
-                    temp += R"(\")"s;
-                else
-                    temp += c;
-
-            }
-
-
-
-            return "\"" + temp + "\"";
+            return escapeString(str.value());
 
         }
 
@@ -114,7 +95,7 @@ std::string AddBackslash(std::string str)
 
             for (auto x : this->map.value()) {
 
-                tmp +="\""+ x.first +"\": "  + x.second.ToString() +", " ;
+                tmp += escapeString(x.first) +": "  + x.second.ToString() +", " ;
 
             }
             tmp.erase(tmp.length()-2,2);
@@ -133,7 +114,7 @@ std::string AddBackslash(std::string str)
             std::string tmp;
             tmp += "[";
 
-            for (auto x : this->vector.value()) {
+            for (const auto &x : this->vector.value()) {
 
                 tmp += x.ToString() + ", ";
 
@@ -150,6 +131,25 @@ std::string AddBackslash(std::string str)
 
 
 
+    }
+
+    std::string JsonValue::escapeString(std::string str) const {
+        std::string temp;
+
+        //std::cout << std::endl;;
+
+        for(char c : str)
+            {
+
+                if( c == '\\' || c == '\?')
+                    temp += "\\";
+
+                temp += c;
+
+            }
+
+
+        return "\"" + temp + "\"";
     }
 
     std::experimental::optional<JsonValue> JsonValue::ValueByName(const std::string &name) const {

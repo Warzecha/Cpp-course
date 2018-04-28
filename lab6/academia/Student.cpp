@@ -37,7 +37,7 @@ namespace academia
     }
 
     Student::Student(const std::string &id, const std::string &first_name, const std::string &last_name,
-                     const std::string &program, const int studyYear) : id(id), first_name(first_name),
+                     const std::string &program, int studyYear) : id(id), first_name(first_name),
                                                                               last_name(last_name), program(program),
                                                                               studyYear(studyYear){ }
 
@@ -64,6 +64,11 @@ namespace academia
     void Student::ChangeLastName(std::string new_name) {
         last_name = new_name;
     }
+
+
+
+
+
 
 
 }

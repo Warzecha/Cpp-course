@@ -7,34 +7,63 @@
 #include "algorithm"
 #include "iostream"
 
-int foo(const std::vector<std::string> &v1, const std::vector<int> &v2) {
-    for (const std::pair<std::string,int> &p : Zipper::zip(v1,v2)) {
-        if (p.first == "elo") {
-            return p.second+4;
-        }
+
+
+ZipperIterator &ZipperIterator::operator++() {
+    ptr++;
+
+    return *this;
+}
+
+bool ZipperIterator::operator!=(const ZipperIterator &other) const {
+    return ptr != other.ptr;
+}
+
+ZipperIterator::ZipperIterator(std::pair<std::string, int> *_ptr) {
+    ptr = _ptr;
+
+}
+
+
+
+ZipperIterator Zipper::begin() {
+    return _begin;
+}
+
+ZipperIterator Zipper::end() {
+    return _end;
+}
+
+Zipper Zipper::zip(const std::vector<std::string> &vs, const std::vector<int> &vi) {
+    auto * new_zipper = new Zipper;
+
+
+    new_zipper->vector.resize(std::max(vs.size(), vi.size()));
+
+    int i = 0;
+     for( auto x : vi)
+     {
+         new_zipper->vector[i].second = x;
+
+
+         i++;
+     }
+
+    i = 0;
+    for( auto x : vs)
+    {
+        new_zipper->vector[i].first = x;
+
+        i++;
     }
-    return 0;
-}
 
 
-Zipper::Zipper(std::vector<std::string> text, std::vector<int> value) {
-    this->text = text;
-    this->value = value;
-}
 
-Zipper::~Zipper() {}
-Zipper::Zipper() {}
-Zipper::Zipper(int begin, int end) {
-    this->begin = begin;
-    this->end = end;
-}
+    //Do poprawy
 
-Zipper Zipper::ZipperIterator(std::vector<std::string> text, std::vector<int> value) {
-    int bigger = std::max(text.size(), value.size());
-    std::vector::iterator = 
-    return Zipper(0,bigger-1);
-}
+    new_zipper->_begin;
 
-static Zipper Zipper::zip(std::vector<std::string> text, std::vector<int> value) {
-    return ZipperIterator(text, value);
+
+
+    return Zipper();
 }

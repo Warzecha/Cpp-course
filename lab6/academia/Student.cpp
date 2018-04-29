@@ -65,10 +65,9 @@ namespace academia
         last_name = new_name;
     }
 
-
-
-
-
+    bool Student::operator<(const Student &rhs) const {
+        return id < rhs.id;
+    }
 
 
 }

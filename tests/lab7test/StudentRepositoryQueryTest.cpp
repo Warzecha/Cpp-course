@@ -8,6 +8,7 @@
 #include <StudentRepository.h>
 #include <StudentRepositoryQueries.h>
 
+
 using ::academia::Query;
 using ::academia::ByFirstName;
 using ::academia::ByLastName;

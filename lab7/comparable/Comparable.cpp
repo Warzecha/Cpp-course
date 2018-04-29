@@ -5,7 +5,7 @@
 #include "Comparable.h"
 
 bool academia::ByFirstNameAscending::IsLess(const academia::Student &left, const academia::Student &right) {
-    return left.FirstName().compare(right.FirstName()) > 0;
+    return left.FirstName().compare(right.FirstName()) < 0;
 }
 
 bool academia::ByFirstNameAscending::operator()(const academia::Student &left, const academia::Student &right) {
@@ -13,7 +13,7 @@ bool academia::ByFirstNameAscending::operator()(const academia::Student &left, c
 }
 
 bool academia::ByFirstNameDescending::IsLess(const academia::Student &left, const academia::Student &right) {
-    return left.FirstName().compare(right.FirstName()) < 0;
+    return left.FirstName().compare(right.FirstName()) > 0;
 }
 
 bool academia::ByFirstNameDescending::operator()(const academia::Student &left, const academia::Student &right) {
@@ -21,7 +21,7 @@ bool academia::ByFirstNameDescending::operator()(const academia::Student &left, 
 }
 
 bool academia::ByLastNameAscending::IsLess(const academia::Student &left, const academia::Student &right) {
-    return left.LastName().compare(right.LastName()) > 0;
+    return left.LastName().compare(right.LastName()) < 0;
 }
 
 bool academia::ByLastNameAscending::operator()(const academia::Student &left, const academia::Student &right) {
@@ -36,7 +36,7 @@ bool academia::ByProgramAscendingEmptyFirst::IsLess(const academia::Student &lef
     if(right.Program() == "")
         return false;
 
-    return left.Program().compare(right.Program()) > 0;
+    return left.Program().compare(right.Program()) < 0;
 
 }
 

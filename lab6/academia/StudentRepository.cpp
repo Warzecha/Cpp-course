@@ -36,4 +36,31 @@ namespace academia
     StudentRepository::StudentRepository() {
         studentCount = 0;
     }
+
+    std::vector<Student> StudentRepository::FindByQuery(const Query &query) {
+        std::vector<Student> accepted;
+
+        for(const auto &s : map)
+        {
+            if (query.Accept(s.second))
+            {
+                accepted.push_back(s.second);
+            }
+        }
+        return accepted;
+    }
+
+    std::vector<Student> StudentRepository::FindByQuery(std::unique_ptr<Query> query) {
+        std::vector<Student> accepted;
+
+        for(const auto &s : map)
+        {
+            if (query->Accept(s.second))
+            {
+                accepted.push_back(s.second);
+            }
+        }
+        return accepted;
+    }
+
 }

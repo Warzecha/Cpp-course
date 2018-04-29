@@ -43,6 +43,7 @@ namespace academia
 
         void ChangeLastName(std::string new_name);
 
+        bool operator<(const Student &rhs) const;
 
 
     private:

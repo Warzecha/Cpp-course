@@ -7,63 +7,70 @@
 #include "algorithm"
 #include "iostream"
 
+namespace datastructures
+{
 
+    ZipperIterator &ZipperIterator::operator++() {
+        ptr++;
 
-ZipperIterator &ZipperIterator::operator++() {
-    ptr++;
+        return *this;
+    }
 
-    return *this;
-}
+    bool ZipperIterator::operator!=(const ZipperIterator &other) const {
+        return ptr != other.ptr;
+    }
 
-bool ZipperIterator::operator!=(const ZipperIterator &other) const {
-    return ptr != other.ptr;
-}
+    ZipperIterator::ZipperIterator(std::pair<std::string, int> *_ptr) {
+        ptr = _ptr;
 
-ZipperIterator::ZipperIterator(std::pair<std::string, int> *_ptr) {
-    ptr = _ptr;
+    }
 
-}
-
-
-
-ZipperIterator Zipper::begin() {
-    return _begin;
-}
-
-ZipperIterator Zipper::end() {
-    return _end;
-}
-
-Zipper Zipper::zip(const std::vector<std::string> &vs, const std::vector<int> &vi) {
-    auto * new_zipper = new Zipper;
-
-
-    new_zipper->vector.resize(std::max(vs.size(), vi.size()));
-
-    int i = 0;
-     for( auto x : vi)
-     {
-         new_zipper->vector[i].second = x;
-
-
-         i++;
-     }
-
-    i = 0;
-    for( auto x : vs)
-    {
-        new_zipper->vector[i].first = x;
-
-        i++;
+    std::pair<std::string, int> ZipperIterator::operator*() const {
+        return *ptr;
     }
 
 
+    ZipperIterator Zipper::begin() {
+        return ZipperIterator(&(*vector.begin()));
+    }
 
-    //Do poprawy
+    ZipperIterator Zipper::end() {
+        return ZipperIterator(&(*vector.end()));
+    }
 
-    new_zipper->_begin;
+    Zipper Zipper::zip(const std::vector<std::string> &vs, const std::vector<int> &vi) {
+        auto new_zipper = Zipper();
+
+
+        new_zipper.vector.resize(std::max(vs.size(), vi.size()));
+
+        int i = 0;
+        for( auto x : vi)
+        {
+            new_zipper.vector[i].second = x;
+
+
+            i++;
+        }
+
+        i = 0;
+        for(const auto &x : vs)
+        {
+            new_zipper.vector[i].first = x;
+
+            i++;
+        }
 
 
 
-    return Zipper();
+        //Do poprawy
+
+
+
+
+
+        return new_zipper;
+    }
+
 }
+

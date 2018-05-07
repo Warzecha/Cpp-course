@@ -37,33 +37,18 @@ int main()
     
     
     
-    std::string wiadomosc = "end of the world";
-    std::string klucz = "aab";
 
-    std::vector<char> cryptogram2;
-    
-    for(auto c : wiadomosc)
+    std::string klucz = "aaa";
+    int i;
+    while(true)
     {
-        cryptogram2.push_back(c);
-    }
-    
-    std::string zakodowana = XorCypher(cryptogram, klucz.length(), klucz);
-    
-    std::cout<<"zakodowana: "<<zakodowana<<std::endl;
+        klucz = generateNextKey(klucz);
+        std::cout << klucz << std::endl;
+        getchar();
 
-    std::vector<char> cryptogram3;
-
-    for(auto c : zakodowana)
-    {
-        cryptogram3.push_back(c);
     }
 
 
-    std::string key = XorCypherBreaker(cryptogram3, 3, dictionary);
-    std::cout<<"klucz: "<<key<<std::endl;
-    std::string message = XorCypher(cryptogram3,key.length(),key);
-
-    std::cout<<message<<std::endl<<std::endl;
 
     
 

@@ -104,7 +104,7 @@ namespace academia
         {
             it->get().Serialize(this);
 
-            if(it+1 != value.end())
+            if(std::next(it) != value.end())
             {
                 this->Separator();
             }

@@ -6,10 +6,11 @@
 #define JIMP_EXERCISES_SERIALIZATION_H
 
 
-
+#include <experimental/optional>
 #include <string>
 #include <vector>
 #include <memory>
+
 
 namespace academia
 {
@@ -89,7 +90,7 @@ namespace academia
 
         void Footer(const std::string &object_name) override;
 
-        void Separator() override;
+
 
 
 
@@ -148,6 +149,8 @@ namespace academia
 
         void Serialize(Serializer *serializer) const override ;
 
+        int Id() const;
+
     private:
         int id;
         std::string name;
@@ -155,6 +158,27 @@ namespace academia
 
     };
 
+
+
+
+
+    class BuildingRepository
+    {
+    public:
+        BuildingRepository(const std::vector<Building> &buildings);
+
+        BuildingRepository();
+
+        BuildingRepository(const std::initializer_list<Building> &buildings);
+
+        void Add(const Building &new_building);
+        void StoreAll(Serializer *serializer);
+
+        std::experimental::optional<Building> operator[] (int _id) const ;
+
+    private:
+        std::vector<Building> buildings;
+    };
 
 
 

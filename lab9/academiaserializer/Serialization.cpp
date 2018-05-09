@@ -49,8 +49,12 @@ namespace academia
         std::vector<std::reference_wrapper<const academia::Serializable>> value(rooms.begin(),rooms.end());
 
         serializer->ArrayField("rooms", value);
-        serializer->Footer("room");
+        serializer->Footer("building");
 
+    }
+
+    int Building::Id() const {
+        return id;
     }
 
 
@@ -147,7 +151,25 @@ namespace academia
     void XmlSerializer::ArrayField(const std::string &field_name,
                                    const std::vector<std::reference_wrapper<const academia::Serializable>> &value) {
 
+        ostream << "<" + field_name + ">";
+
+
+
+        for(auto it = value.begin(); it != value.end(); ++it)
+        {
+            it->get().Serialize(this);
+
+            if(std::next(it) != value.end())
+            {
+                this->Separator();
+            }
+
+        }
+
+
+        ostream << "<\\" + field_name + ">";
     }
+
 
     void XmlSerializer::Header(const std::string &object_name) {
         ostream << "<" + object_name + ">";
@@ -158,7 +180,49 @@ namespace academia
         ostream << "<\\" + object_name + ">";
     }
 
-    void XmlSerializer::Separator() {
+
+    BuildingRepository::BuildingRepository(const std::vector<Building> &buildings) : buildings(buildings) {}
+
+    BuildingRepository::BuildingRepository() = default;
+
+    void BuildingRepository::Add(const Building &new_building) {
+        buildings.push_back(new_building);
 
     }
+
+    void BuildingRepository::StoreAll(Serializer *serializer) {
+
+        serializer->Header("building_repository");
+        std::vector<std::reference_wrapper<const academia::Serializable>> value(buildings.begin(),buildings.end());
+
+        serializer->ArrayField("buildings", value);
+
+        serializer->Footer("building_repository");
+
+
+    }
+
+    BuildingRepository::BuildingRepository(const std::initializer_list<Building> &buildings) {
+
+        for(const auto &b : buildings)
+        {
+            this->buildings.push_back(b);
+        }
+    }
+
+    std::experimental::optional<Building> BuildingRepository::operator[](int _id) const {
+
+        for(const auto &b : buildings)
+        {
+            if(b.Id() == _id)
+                return std::experimental::optional<Building>(b);
+
+        }
+
+        return std::experimental::optional<Building>();
+    }
+
+
 }
+
+

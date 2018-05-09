@@ -25,12 +25,12 @@ namespace academia
 
 
 
-    class AcademiaDataValidationError : public std::logic_error
+    class AcademiaDataValidationError : public std::invalid_argument
     {
     public:
         AcademiaDataValidationError(const std::string &__arg);
 
-    public:
+
 
 
 

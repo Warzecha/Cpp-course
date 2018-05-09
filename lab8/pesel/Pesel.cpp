@@ -45,7 +45,7 @@ namespace academia
         return true;
     }
 
-    AcademiaDataValidationError::AcademiaDataValidationError(const std::string &__arg) : logic_error(__arg) {}
+    AcademiaDataValidationError::AcademiaDataValidationError(const std::string &__arg) : invalid_argument(__arg) {}
 
 
 

@@ -130,15 +130,15 @@ namespace academia
 
         Schedule new_schedule;
 
-        for(const auto &year : courses_of_year)
+        for(const auto &teacher : teacher_courses_assignment)
         {
 
-            for(const auto & course : year.second)
+            for(const auto & course : teacher.second)
             {
 
-                auto teacher = std::find_if(teacher_courses_assignment.begin(), teacher_courses_assignment.end(), [course](std::pair<int,std::vector<int>> teacher) -> bool { return std::find(teacher.second.begin(), teacher.second.end(), course) != teacher.second.end();});
-                auto availible_teacher_schedule = new_schedule.OfTeacher(teacher->first).AvailableTimeSlots(n_time_slots);
-                auto availible_year_schedule = new_schedule.OfYear(year.first).AvailableTimeSlots(n_time_slots);
+                auto year = std::find_if(courses_of_year.begin(), courses_of_year.end(), [course](std::pair<int,std::set<int>> _year) -> bool { return std::find(_year.second.begin(), _year.second.end(), course) != _year.second.end();});
+                auto availible_teacher_schedule = new_schedule.OfTeacher(teacher.first).AvailableTimeSlots(n_time_slots);
+                auto availible_year_schedule = new_schedule.OfYear(year->first).AvailableTimeSlots(n_time_slots);
 
 
                 std::vector<int> time_slots = commonElements(availible_year_schedule, availible_teacher_schedule);
@@ -161,7 +161,7 @@ namespace academia
                     if(!final_availibility.empty())
                     {
 
-                        SchedulingItem new_item(course, teacher->first, rooms[i], final_availibility[0],year.first);
+                        SchedulingItem new_item(course, teacher.first, rooms[i], final_availibility[0],year->first);
                         new_schedule.InsertScheduleItem(new_item);
                         assigned_flag = true;
 

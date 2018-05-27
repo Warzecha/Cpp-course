@@ -6,6 +6,8 @@
 #define JIMP_EXERCISES_SCHEDULER_H
 
 #include <vector>
+#include <map>
+#include <set>
 
 namespace academia
 {
@@ -44,6 +46,8 @@ namespace academia
 
         SchedulingItem operator[](int index) const;
 
+        std::vector<int> AvailableTimeSlots(int max) const ;
+
 
     private:
         std::vector<academia::SchedulingItem> schedule;
@@ -54,9 +58,27 @@ namespace academia
 
     class Scheduler {
 
+    public:
+        virtual Schedule PrepareNewSchedule(const std::vector<int> &rooms, const std::map<int, std::vector<int>> &teacher_courses_assignment, const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) = 0;
+
+
+    };
 
 
 
+    class GreedyScheduler : public Scheduler
+    {
+        Schedule PrepareNewSchedule(const std::vector<int> &rooms, const std::map<int, std::vector<int>> &teacher_courses_assignment, const std::map<int, std::set<int>> &courses_of_year, int n_time_slots) override;
+
+
+
+
+    };
+
+
+
+    class NoViableSolutionFound : public std::exception
+    {
 
 
 
